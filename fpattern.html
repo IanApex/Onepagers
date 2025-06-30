@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The F-Pattern: How People Actually Read Web Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .hero-bg {
+            background-color: #f8fafc;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .heatmap {
+            background: linear-gradient(to right, 
+                rgba(255, 0, 0, 0.6), 
+                rgba(255, 165, 0, 0.4) 70%, 
+                rgba(255, 255, 0, 0.2) 90%,
+                rgba(255, 255, 0, 0) 100%
+            );
+            position: absolute;
+            pointer-events: none;
+        }
+        .f-pattern-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 3s ease-in-out forwards;
+        }
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-center py-20 px-4 sm:py-28 overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+                The F-Pattern
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+                Eye-tracking research shows us how people *actually* scan web pages. Understanding this pattern is key to designing more effective layouts.
+            </p>
+            <div class="mt-8">
+                <a href="#implications" class="inline-block bg-blue-600 text-white font-semibold rounded-lg px-6 py-3 hover:bg-blue-700 transition-colors">
+                    See Design Implications
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+
+        <!-- What is the F-Pattern Section -->
+        <section class="mb-20 max-w-5xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">What is the F-Pattern?</h2>
+                <p class="text-lg text-slate-600 mb-8 max-w-3xl mx-auto">The F-Pattern describes how our eyes naturally scan web pages: horizontally across the top, another shorter pass below, and then vertically down the left side. This creates a rough "F" shape.</p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-slate-200">
+                <div class="relative aspect-[16/9] bg-slate-100 rounded-lg p-6">
+                    <!-- Mockup content -->
+                    <div class="w-1/3 h-8 bg-slate-300 rounded"></div>
+                    <div class="mt-4 space-y-2">
+                        <div class="w-full h-4 bg-slate-200 rounded"></div>
+                        <div class="w-5/6 h-4 bg-slate-200 rounded"></div>
+                    </div>
+                     <div class="mt-8 space-y-2">
+                        <div class="w-3/4 h-4 bg-slate-200 rounded"></div>
+                        <div class="w-1/2 h-4 bg-slate-200 rounded"></div>
+                    </div>
+                    <div class="mt-8 space-y-2">
+                        <div class="w-1/4 h-4 bg-slate-200 rounded"></div>
+                        <div class="w-1/4 h-4 bg-slate-200 rounded mt-4"></div>
+                        <div class="w-1/4 h-4 bg-slate-200 rounded mt-4"></div>
+                    </div>
+                    <!-- F-Pattern Heatmap Overlay -->
+                    <div class="absolute top-6 left-6 w-full h-8 heatmap"></div>
+                    <div class="absolute top-28 left-6 w-3/4 h-4 heatmap"></div>
+                    <div class="absolute top-28 left-6 w-8 h-40" style="background: linear-gradient(to bottom, rgba(255,0,0,0.6), rgba(255,165,0,0.2) 60%, transparent);"></div>
+
+                    <!-- F-Pattern Line Drawing -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 25 L 300 25 M 20 60 L 220 60 M 20 60 L 20 160" stroke="#ef4444" stroke-width="4" stroke-linecap="round" class="f-pattern-path"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why It Happens Section -->
+        <section class="mb-20">
+             <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Why the F-Pattern Happens</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">This isn't random; it's a subconscious strategy for efficiently processing information online.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card text-center items-center flex flex-col">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800">Efficiency</h3>
+                    <p class="mt-2 text-slate-600">Our brains filter dense content to find relevant information quickly and with minimal effort.</p>
+                </div>
+                <div class="card text-center items-center flex flex-col">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800">Reading Habits</h3>
+                    <p class="mt-2 text-slate-600">Follows the natural left-to-right, top-to-bottom pattern taught in many cultures.</p>
+                </div>
+                <div class="card text-center items-center flex flex-col">
+                     <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800">Goal-Oriented</h3>
+                    <p class="mt-2 text-slate-600">Users are usually hunting for something specific, not leisurely reading word-for-word.</p>
+                </div>
+                 <div class="card text-center items-center flex flex-col">
+                     <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10h.01M15 10h.01M9 14h6"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800">Reduces Overload</h3>
+                    <p class="mt-2 text-slate-600">It's a coping mechanism for the overwhelming amount of information on most web pages.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Implications for Web Design Section -->
+        <section id="implications" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Implications for Web Design</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Knowing the F-Pattern means you can place your most important content where it will be seen.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg border">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-4">Critical Info Top-Left</h3>
+                        <p class="text-slate-600 mb-4">Place your value proposition, key message, and primary call-to-action in the highest-attention zone.</p>
+                        <div class="p-4 border border-blue-200 rounded-lg bg-blue-50">
+                            <h4 class="font-bold text-blue-800">Example:</h4>
+                            <p class="text-blue-700">"Build Websites Faster" <span class="block font-normal text-sm">Your most important message goes here.</span></p>
+                            <button class="mt-2 bg-blue-600 text-white text-sm font-semibold py-1 px-3 rounded-md">Start Free Trial</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-4">Front-Load Important Words</h3>
+                        <p class="text-slate-600 mb-4">Start headlines and sentences with the most impactful words, as users may not read to the end.</p>
+                         <div class="p-4 border rounded-lg">
+                            <p class="mb-2"><span class="bg-red-200 text-red-800 rounded px-1 py-0.5 font-semibold">Bad:</span> Today you can schedule a demo.</p>
+                            <p><span class="bg-green-200 text-green-800 rounded px-1 py-0.5 font-semibold">Good:</span> Schedule a demo today.</p>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-4">Use the Left Edge</h3>
+                        <p class="text-slate-600 mb-4">The left side acts as a scanning highway. Use it for navigation, section headers, or bullet points to orient users.</p>
+                         <div class="p-4 border rounded-lg flex space-x-4">
+                            <ul style="width: 150px;" class="text-slate-700 space-y-1">
+                                <li class="font-bold">✓ Section One</li>
+                                <li>✓ Section Two</li>
+                                <li>✓ Section Three</li>
+                            </ul>
+                            <p class="text-sm text-slate-500 border-l pl-4">The left column with clear starting points is easy to scan vertically.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-4">Design for Scanning</h3>
+                        <p class="text-slate-600 mb-4">Use bullet points, short paragraphs, and bold text to break up content and make it easy to digest quickly.</p>
+                        <div class="p-4 border rounded-lg">
+                            <p class="text-slate-600 text-sm">Long, dense paragraphs are often skipped entirely. <strong>Break them up.</strong> Use lists. Make key points stand out so a scanner gets the main idea without reading every word.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Variations -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Mobile & F-Pattern Variations</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">On narrow screens, the pattern can change. Sometimes it looks more like a "Z".</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center">
+                    <h3 class="font-bold text-xl mb-4">Mobile "Z-Pattern"</h3>
+                    <div class="w-48 mx-auto bg-slate-800 rounded-3xl p-2 border-4 border-slate-700 shadow-xl">
+                        <div class="aspect-[9/16] bg-slate-100 rounded-xl relative overflow-hidden p-3">
+                            <div class="w-1/2 h-5 bg-slate-300 rounded mb-4"></div>
+                            <div class="w-full h-3 bg-slate-200 rounded mb-1"></div>
+                             <div class="w-2/3 h-3 bg-slate-200 rounded"></div>
+                            <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 48 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 10 L 43 10 L 5 70 L 43 70" stroke="#ef4444" stroke-width="2" stroke-linecap="round" class="f-pattern-path" style="animation-duration: 2s;"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                     <h3 class="text-xl font-bold text-slate-900 mb-2">Key Differences on Mobile</h3>
+                     <ul class="list-disc list-inside space-y-2 text-slate-600">
+                         <li><strong>Z-Pattern:</strong> Often more applicable due to the narrow viewport.</li>
+                         <li><strong>Thumb Zone:</strong> Interactive elements must be within easy reach.</li>
+                         <li><strong>Vertical Priority:</strong> Scrolling is the primary action, making the vertical scan even more important.</li>
+                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Bottom Line Section -->
+        <footer class="bg-slate-900 mt-24 sm:mt-32">
+            <div class="max-w-4xl mx-auto text-center py-16 px-4">
+                 <h2 class="text-3xl font-bold text-white">The Bottom Line</h2>
+                 <p class="mt-4 text-lg text-slate-300">The F-pattern isn't a rigid rule, but a powerful insight into user behavior. Design for scanners first and readers second. Help users find what they need quickly, and they'll be more likely to engage with your content.</p>
+                 <p class="mt-8 text-xl font-semibold text-blue-300">Good design works with human psychology, not against it.</p>
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>

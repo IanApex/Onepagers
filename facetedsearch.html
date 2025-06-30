@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faceted Search: Helping Users Filter Without Overwhelm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .hero-bg {
+            background-color: #f8fafc;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .stat-highlight {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #4f46e5; /* Indigo */
+        }
+        .good-example {
+            border-left: 4px solid #10b981; /* Emerald-500 */
+            background-color: #ecfdf5; /* Emerald-50 */
+        }
+        .bad-example {
+            border-left: 4px solid #ef4444; /* Red-500 */
+            background-color: #fef2f2; /* Red-50 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-center py-20 px-4 sm:py-28">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+                Faceted Search
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+                How to help users filter large catalogs and content libraries without causing overwhelm, frustration, or abandonment.
+            </p>
+            <div class="mt-8">
+                <a href="#best-practices" class="inline-block bg-indigo-600 text-white font-semibold rounded-lg px-6 py-3 hover:bg-indigo-700 transition-colors">
+                    See Best Practices
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+
+        <!-- What is Faceted Search Section -->
+        <section class="mb-20 max-w-5xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">What is Faceted Search?</h2>
+                <p class="text-lg text-slate-600 mb-8 max-w-3xl mx-auto">It's a system that lets users narrow down results by applying multiple filters (facets) at once. It turns an overwhelming catalog into a manageable list of relevant options.</p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-slate-200">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Filters Sidebar -->
+                    <aside class="w-full md:w-1/4 lg:w-1/5">
+                        <h3 class="font-bold text-lg mb-4">Filters</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Category</h4>
+                                <ul class="text-sm space-y-1 mt-2">
+                                    <li><input type="checkbox" checked id="cat1" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="cat1">Shoes (112)</label></li>
+                                    <li><input type="checkbox" id="cat2" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="cat2">Shirts (340)</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Size</h4>
+                                <ul class="text-sm space-y-1 mt-2">
+                                    <li><input type="checkbox" id="size1" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="size1">7</label></li>
+                                    <li><input type="checkbox" checked id="size2" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="size2">8 (45)</label></li>
+                                    <li><input type="checkbox" id="size3" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="size3">9</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Price</h4>
+                                <input type="range" min="0" max="200" value="100" class="w-full mt-2">
+                                <p class="text-sm text-center">Under $100</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-slate-800">Brand</h4>
+                                <ul class="text-sm space-y-1 mt-2">
+                                    <li><input type="checkbox" checked id="brand1" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="brand1">Nike (18)</label></li>
+                                    <li><input type="checkbox" id="brand2" class="rounded text-indigo-600 focus:ring-indigo-500"> <label for="brand2">Adidas (21)</label></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </aside>
+                    <!-- Product Grid -->
+                    <div class="flex-1">
+                         <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-sm font-medium">Applied Filters:</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Shoes ×</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Size 8 ×</span>
+                             <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Under $100 ×</span>
+                             <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Nike ×</span>
+                        </div>
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Product cards -->
+                            <div class="border rounded-lg p-2"><div class="aspect-square bg-slate-200 rounded"></div><p class="text-sm mt-2 font-semibold">Nike Air Zoom</p><p class="text-sm text-slate-600">$95</p></div>
+                            <div class="border rounded-lg p-2"><div class="aspect-square bg-slate-200 rounded"></div><p class="text-sm mt-2 font-semibold">Nike Pegasus</p><p class="text-sm text-slate-600">$89</p></div>
+                            <div class="border rounded-lg p-2"><div class="aspect-square bg-slate-200 rounded"></div><p class="text-sm mt-2 font-semibold">Nike Flex</p><p class="text-sm text-slate-600">$75</p></div>
+                             <div class="border rounded-lg p-2 bg-slate-50 opacity-50"><div class="aspect-square bg-slate-200 rounded"></div><p class="text-sm mt-2 font-semibold">Nike Revolution</p><p class="text-sm text-slate-600">$65</p></div>
+                        </div>
+                         <p class="text-center mt-4 text-sm text-slate-500">Showing 4 of 18 results</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Highlights Section -->
+        <section class="mb-20">
+             <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">The Impact is Measurable</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Poor filtering drives users away, while good filtering drives sales and engagement.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="stat-highlight">68%</div>
+                    <p class="font-semibold text-indigo-800 mt-2">of users abandon sites with poor filtering options, according to Baymard Institute.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">2.3x</div>
+                    <p class="font-semibold text-indigo-800 mt-2">more likely to purchase for users who engage with filters.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">35%</div>
+                    <p class="font-semibold text-indigo-800 mt-2">reduction in time-to-find a product, according to Nielsen Norman Group.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Common Design Mistakes Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Common Design Mistakes</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Avoid these common pitfalls that create frustration instead of clarity.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bad-example p-4 rounded-lg">
+                    <h3 class="font-bold text-red-800">Showing Every Filter</h3>
+                    <p class="text-red-700 mt-1">Overwhelming users with dozens of options at once defeats the purpose.</p>
+                </div>
+                 <div class="bad-example p-4 rounded-lg">
+                    <h3 class="font-bold text-red-800">No Result Counts</h3>
+                    <p class="text-red-700 mt-1">Users filter blind, often leading to "0 results found" dead ends.</p>
+                </div>
+                <div class="bad-example p-4 rounded-lg">
+                    <h3 class="font-bold text-red-800">Hidden Applied Filters</h3>
+                    <p class="text-red-700 mt-1">Users lose track of their selections and can't easily modify them.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Best Practices Section -->
+        <section id="best-practices" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Design Best Practices</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Follow these principles to create a filtering experience that feels helpful, not complicated.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Progressive Disclosure</h3>
+                    <p class="text-sm text-slate-600 mb-4">Show the top 3-5 filters by default, with a "Show More" option to prevent initial overwhelm.</p>
+                    <div class="p-3 border rounded-lg bg-slate-50 text-sm">
+                        <p>✓ Category</p>
+                        <p>✓ Price</p>
+                        <p>✓ Brand</p>
+                        <p class="text-indigo-600 font-semibold mt-1 cursor-pointer">Show 8 more filters...</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Dynamic Result Counts</h3>
+                    <p class="text-sm text-slate-600 mb-4">Update counts as filters are applied to guide users toward valid selections.</p>
+                     <div class="p-3 border rounded-lg bg-slate-50 text-sm">
+                        <p>Color</p>
+                        <p class="text-slate-700 ml-2">Blue (45)</p>
+                        <p class="text-slate-400 ml-2">Red (0) <span class="italic">- disabled</span></p>
+                        <p class="text-slate-700 ml-2">Green (12)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Easy Filter Management</h3>
+                    <p class="text-sm text-slate-600 mb-4">Clearly display applied filters and make them easy to remove individually or all at once.</p>
+                     <div class="p-3 border rounded-lg bg-slate-50 text-sm">
+                        <p class="font-semibold mb-2">Applied:</p>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2 py-1 rounded-full">Shoes ×</span>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2 py-1 rounded-full">Nike ×</span>
+                        <a href="#" class="text-indigo-600 font-semibold ml-2">Clear All</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Considerations -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Mobile Considerations</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Desktop filters don't work on mobile. A dedicated approach is required.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:order-2">
+                    <h3 class="font-bold text-xl mb-4">Use a Collapsible Overlay</h3>
+                    <div class="w-48 mx-auto bg-slate-800 rounded-3xl p-2 border-4 border-slate-700 shadow-xl">
+                        <div class="aspect-[9/16] bg-slate-100 rounded-xl relative overflow-hidden">
+                           <!-- Background page -->
+                           <div class="p-2 space-y-2">
+                               <div class="w-full h-12 bg-slate-200 rounded"></div>
+                               <div class="w-full h-12 bg-slate-200 rounded"></div>
+                               <div class="w-full h-12 bg-slate-200 rounded"></div>
+                           </div>
+                           <!-- Filter button -->
+                           <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-bold py-2 px-4 rounded-full shadow-lg">Filter & Sort</div>
+                           <!-- Filter Overlay -->
+                           <div class="absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col p-3">
+                                <h4 class="font-bold text-lg">Filters</h4>
+                                <div class="text-xs space-y-1 mt-2">
+                                    <p class="font-semibold">Category</p>
+                                    <p>✓ Shoes</p>
+                                    <p class="font-semibold mt-1">Price</p>
+                                    <p>✓ Under $100</p>
+                                </div>
+                                <button class="mt-auto w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg text-sm">Show 18 Results</button>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:order-1">
+                     <h3 class="text-xl font-bold text-slate-900 mb-2">Mobile Best Practices</h3>
+                     <ul class="list-disc list-inside space-y-2 text-slate-600">
+                         <li>Use an <strong>overlay or slide-out panel</strong> for filters.</li>
+                         <li>Ensure controls are <strong>large and touch-friendly</strong>.</li>
+                         <li>Let users select multiple filters, then tap an <strong>"Apply" button</strong> to see results (batch application).</li>
+                         <li>Show a <strong>summary of applied filters</strong> on the results page.</li>
+                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Bottom Line Section -->
+        <footer class="bg-slate-900 mt-24 sm:mt-32">
+            <div class="max-w-4xl mx-auto text-center py-16 px-4">
+                 <h2 class="text-3xl font-bold text-white">The Bottom Line</h2>
+                 <p class="mt-4 text-lg text-slate-300">Good faceted search feels like a knowledgeable assistant guiding users to the perfect option. It transforms overwhelming choice into a powerful, user-controlled discovery tool.</p>
+                 <p class="mt-8 text-xl font-semibold text-indigo-300">The goal isn't to show every possible filter—it's to help users find what they want as efficiently as possible.</p>
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faceted Search: Helping Users Filter Without Overwhelm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .hero-bg {
+            background-color: #f8fafc;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .stat-highlight {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #3b82f6;
+        }
+        .good-example {
+            border-left: 4px solid #10b981;
+            background-color: #ecfdf5;
+        }
+        .bad-example {
+            border-left: 4px solid #ef4444;
+            background-color: #fef2f2;
+        }
+        .filter-demo {
+            transition: all 0.3s ease;
+        }
+        .filter-demo:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-center py-20 px-4 sm:py-28">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+                Faceted Search
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+                Transform overwhelming product catalogs into manageable, personalized shopping experiences. Help users find exactly what they need without the cognitive overload.
+            </p>
+            <div class="mt-8">
+                <a href="#benefits" class="inline-block bg-blue-600 text-white font-semibold rounded-lg px-6 py-3 hover:bg-blue-700 transition-colors">
+                    See How It Works
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+
+        <!-- What is Faceted Search Section -->
+        <section class="mb-20 max-w-4xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">What is Faceted Search?</h2>
+                <p class="text-lg text-slate-600 mb-8">Faceted search lets users narrow down large sets of results by applying multiple filters simultaneously. Instead of browsing through hundreds of products or articles, users can specify criteria like price range, brand, size, color, or category to find exactly what they need.</p>
+            </div>
+            
+            <!-- Interactive Demo -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border">
+                <h3 class="font-bold text-slate-800 text-lg mb-4">Example: Finding the Perfect Shoes</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Filters Panel -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-slate-800 mb-3">Filters Applied:</h4>
+                            <div class="space-y-2">
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center justify-between">
+                                    Women's <span class="text-blue-600">×</span>
+                                </div>
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center justify-between">
+                                    Shoes <span class="text-blue-600">×</span>
+                                </div>
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center justify-between">
+                                    Size 8 <span class="text-blue-600">×</span>
+                                </div>
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center justify-between">
+                                    Under $100 <span class="text-blue-600">×</span>
+                                </div>
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center justify-between">
+                                    Nike <span class="text-blue-600">×</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Results -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-emerald-800 font-semibold">12 products found</span>
+                                <span class="text-sm text-emerald-600">Perfect matches!</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-white p-3 rounded border text-center">
+                                    <div class="w-16 h-16 bg-slate-200 rounded mx-auto mb-2"></div>
+                                    <p class="text-sm font-medium">Nike Air Max</p>
+                                    <p class="text-sm text-slate-600">$89.99</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border text-center">
+                                    <div class="w-16 h-16 bg-slate-200 rounded mx-auto mb-2"></div>
+                                    <p class="text-sm font-medium">Nike React</p>
+                                    <p class="text-sm text-slate-600">$94.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research & Benefits Section -->
+        <section id="benefits" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Why Faceted Search Works</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Research consistently shows that effective filtering dramatically improves user experience and business outcomes.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="stat-highlight">26%</div>
+                    <p class="font-semibold text-blue-800 mt-2">Increase in conversion rates with faceted search implementation.</p>
+                    <p class="text-sm text-slate-600 mt-2">Source: Baymard Institute</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">2.3x</div>
+                    <p class="font-semibold text-blue-800 mt-2">More likely to make a purchase when users filter products.</p>
+                    <p class="text-sm text-slate-600 mt-2">Users who filter are more engaged</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">35%</div>
+                    <p class="font-semibold text-blue-800 mt-2">Reduction in time-to-find compared to browsing navigation.</p>
+                    <p class="text-sm text-slate-600 mt-2">Nielsen Norman Group research</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">68%</div>
+                    <p class="font-semibold text-blue-800 mt-2">Of users abandon sites with poor filtering options.</p>
+                    <p class="text-sm text-slate-600 mt-2">Don't let this be your site</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-highlight">15%</div>
+                    <p class="font-semibold text-blue-800 mt-2">More spending per transaction for users who filter.</p>
+                    <p class="text-sm text-slate-600 mt-2">Amazon internal data</p>
+                </div>
+                <div class="card text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <p class="font-semibold text-blue-800">Lower Cart Abandonment</p>
+                    <p class="text-sm text-slate-600 mt-2">Users who filter return more frequently and abandon carts less often.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- When It Works Best Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">When Faceted Search Works Best</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Not every site needs faceted search, but these scenarios definitely benefit from it.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Large Product Catalogs</h3>
+                            <p class="text-slate-600 mt-2">E-commerce sites with hundreds or thousands of items benefit enormously. Fashion, electronics, home goods, and automotive sites see significant improvements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Content-Heavy Sites</h3>
+                            <p class="text-slate-600 mt-2">News sites, job boards, real estate listings, and educational resources where users need to find specific information within large datasets.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">B2B Product Sites</h3>
+                            <p class="text-slate-600 mt-2">Industrial catalogs, software directories, and service providers where buyers have very specific technical requirements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Multiple Independent Attributes</h3>
+                            <p class="text-slate-600 mt-2">If your content has multiple, independent attributes (price, location, date, category, rating), faceted search probably makes sense.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Mistakes Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Common Design Mistakes</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">These mistakes defeat the purpose of faceted search and frustrate users.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bad-example p-6 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">❌ Showing Every Possible Filter</h3>
+                    <p class="text-red-700">Overwhelming users with 20+ filter options defeats the purpose. Not every attribute needs to be a filter - focus on the ones users actually care about.</p>
+                    <div class="mt-4 p-3 bg-red-100 rounded text-sm">
+                        <p class="font-medium text-red-800">Example of Too Many Filters:</p>
+                        <div class="grid grid-cols-3 gap-1 mt-2 text-xs">
+                            <span class="bg-white px-2 py-1 rounded">Brand</span>
+                            <span class="bg-white px-2 py-1 rounded">Color</span>
+                            <span class="bg-white px-2 py-1 rounded">Size</span>
+                            <span class="bg-white px-2 py-1 rounded">Material</span>
+                            <span class="bg-white px-2 py-1 rounded">Style</span>
+                            <span class="bg-white px-2 py-1 rounded">Season</span>
+                            <span class="bg-white px-2 py-1 rounded">Occasion</span>
+                            <span class="bg-white px-2 py-1 rounded">Heel Height</span>
+                            <span class="bg-white px-2 py-1 rounded">Width</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bad-example p-6 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">❌ Poor Filter Prioritization</h3>
+                    <p class="text-red-700">The most important filters should be most prominent. Putting "Color" above "Category" on a general merchandise site makes no sense.</p>
+                    <div class="mt-4 p-3 bg-red-100 rounded text-sm">
+                        <p class="font-medium text-red-800">Wrong Order:</p>
+                        <div class="space-y-1 mt-2">
+                            <div class="bg-white px-2 py-1 rounded text-xs">🎨 Color (least important first)</div>
+                            <div class="bg-white px-2 py-1 rounded text-xs">📏 Size</div>
+                            <div class="bg-white px-2 py-1 rounded text-xs">🏷️ Category (most important last)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bad-example p-6 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">❌ No Result Count Updates</h3>
+                    <p class="text-red-700">Users need to see how many results remain as they apply filters. Without this feedback, they're filtering blind.</p>
+                    <div class="mt-4 p-3 bg-red-100 rounded text-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-red-800">Filters Applied:</span>
+                            <span class="text-red-600">??? results</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bad-example p-6 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">❌ Hidden Applied Filters</h3>
+                    <p class="text-red-700">Users lose track of what filters they've applied. They need to see their current filter state clearly and remove filters easily.</p>
+                    <div class="mt-4 p-3 bg-red-100 rounded text-sm">
+                        <p class="font-medium text-red-800">User thinks: "Why am I only seeing Nike shoes? What filters did I apply?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Design Best Practices</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Follow these principles to create filtering experiences that truly help users.</p>
+            </div>
+            <div class="space-y-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">✅ Progressive Disclosure</h3>
+                        <p class="text-slate-600 mb-4">Show the most important 3-5 filters initially, with an option to expand for more specific filtering. Don't overwhelm users immediately.</p>
+                        <div class="good-example p-4 rounded-lg">
+                            <p class="font-semibold text-emerald-800">Smart Approach:</p>
+                            <p class="text-emerald-700 text-sm">Start with Category, Price, Brand. Then offer "More filters" for Size, Color, Material, etc.</p>
+                        </div>
+                    </div>
+                    <div class="filter-demo bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="font-semibold text-slate-800 mb-4">Primary Filters</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">Category</span>
+                                <select class="text-sm border rounded px-2 py-1">
+                                    <option>All Categories</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">Price Range</span>
+                                <input type="range" class="w-24">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">Brand</span>
+                                <select class="text-sm border rounded px-2 py-1">
+                                    <option>All Brands</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="mt-4 text-blue-600 text-sm font-medium hover:text-blue-700">+ More filters</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="filter-demo bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="font-semibold text-slate-800 mb-4">Current Filters</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between bg-blue-50 px-3 py-2 rounded">
+                                <span class="text-sm text-blue-800">Women's Shoes</span>
+                                <button class="text-blue-600 hover:text-blue-800">×</button>
+                            </div>
+                            <div class="flex items-center justify-between bg-blue-50 px-3 py-2 rounded">
+                                <span class="text-sm text-blue-800">Under $100</span>
+                                <button class="text-blue-600 hover:text-blue-800">×</button>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t">
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-slate-800">47 results found</span>
+                                <button class="text-sm text-slate-600 hover:text-slate-800">Clear all</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">✅ Clear Filter Management</h3>
+                        <p class="text-slate-600 mb-4">Make it simple to see applied filters, remove individual filters, or clear all filters and start over. Always show result counts.</p>
+                        <div class="good-example p-4 rounded-lg">
+                            <p class="font-semibold text-emerald-800">Essential Elements:</p>
+                            <ul class="text-emerald-700 text-sm space-y-1 mt-2">
+                                <li>• Visible applied filters with × to remove</li>
+                                <li>• Live result count updates</li>
+                                <li>• "Clear all" option</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Considerations -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Mobile-Specific Considerations</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Mobile filtering requires a completely different approach than desktop.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4">🔧 Collapsible Filter Interface</h3>
+                    <p class="text-slate-600 mb-4">Use an overlay or slide-out panel for filters on mobile. Don't try to squeeze desktop filter sidebars onto small screens.</p>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-slate-800">Products (127)</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded text-sm">Filters</button>
+                        </div>
+                        <div class="text-xs text-slate-600">Tap "Filters" to open overlay</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4">👆 Touch-Friendly Controls</h3>
+                    <p class="text-slate-600 mb-4">Checkboxes, sliders, and dropdowns need to be large enough for thumbs. Small filter controls frustrate mobile users.</p>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600">
+                                <span class="text-sm">Large touch targets</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600">
+                                <span class="text-sm">Adequate spacing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4">🔄 Batch Application</h3>
+                    <p class="text-slate-600 mb-4">Let mobile users select multiple filters before applying them, rather than refreshing results after each selection.</p>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">3 filters selected</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded text-sm">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4">📝 Filter Summaries</h3>
+                    <p class="text-slate-600 mb-4">Show applied filters prominently so users can see their current state without opening the filter interface.</p>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Women's</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">$50-100</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Nike</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Tips -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Implementation Tips</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Practical advice for building effective faceted search.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Start Simple</h3>
+                    <p class="text-slate-600">Begin with basic filtering for your most important product attributes. You can add sophistication later based on user behavior.</p>
+                </div>
+                <div class="card">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Use Analytics</h3>
+                    <p class="text-slate-600">Track which filters users actually use vs. which ones you think they need. Remove unused filters and prioritize popular ones.</p>
+                </div>
+                <div class="card">
+                    <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Handle Edge Cases</h3>
+                    <p class="text-slate-600">Plan for scenarios like "no results found" or conflicting filter combinations. Provide helpful guidance when filtering leads to dead ends.</p>
+                </div>
+                <div class="card">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Performance Matters</h3>
+                    <p class="text-slate-600">Faceted search can create complex database queries. Ensure your filtering remains fast even with multiple applied filters.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testing Section -->
+        <section class="mb-20 bg-white rounded-2xl shadow-inner border border-slate-100 p-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Testing Your Faceted Search</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Use these questions to evaluate your filtering experience.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg text-emerald-800 mb-4">✅ Good Signs</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="text-slate-700">Users find what they're looking for in 2-3 filter clicks</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="text-slate-700">The most important filters are obvious and accessible</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="text-slate-700">The interface works well on mobile devices</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="text-slate-700">Users can easily modify or remove filters</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-red-800 mb-4">🚨 Red Flags</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </div>
+                            <span class="text-slate-700">Users applying many filters but still not finding what they want</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </div>
+                            <span class="text-slate-700">High bounce rates on filtered result pages</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </div>
+                            <span class="text-slate-700">Users clearing all filters frequently</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </div>
+                            <span class="text-slate-700">Mobile users avoiding the filter interface entirely</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- The Bottom Line Section -->
+    <footer class="bg-slate-900 mt-24 sm:mt-32">
+        <div class="max-w-4xl mx-auto text-center py-16 px-4">
+             <h2 class="text-3xl font-bold text-white">The Bottom Line</h2>
+             <p class="mt-4 text-lg text-slate-300">Faceted search transforms overwhelming choice into manageable decision-making. When done well, it helps users find exactly what they need while discovering options they didn't know existed.</p>
+             <p class="mt-6 text-lg text-slate-300">The key is balance: Provide enough filtering power to be useful without creating complexity that overwhelms users.</p>
+             <p class="mt-8 text-xl font-semibold text-blue-300">Good faceted search feels like having a knowledgeable sales assistant who understands exactly what you're looking for and can guide you to the perfect option.</p>
+             <p class="mt-4 text-sm text-slate-400">Remember: The goal isn't to show off how many filter options you have - it's to help users find what they want as efficiently as possible.</p>
+        </div>
+    </footer>
+
+</body>
+</html> 
